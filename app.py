@@ -55,21 +55,25 @@ def main():
             time_taken = time.time() - start_time
             total_time += time_taken
 
+            # Format the time taken for each file
+            formatted_time = f"{int(time_taken // 3600):02d}:{int((time_taken % 3600) // 60):02d}:{int(time_taken % 60):02d}.{int((time_taken % 1) * 100):02d}"
+
             # Append the time taken to the output file
             with open(output_file_path, "a", encoding="utf-8") as f:
-                f.write(
-                    f"\nTime taken for this transcription: {time_taken:.2f} seconds\n"
-                )
+                f.write(f"\nTime taken for this transcription: {formatted_time}\n")
 
             transcription_count += 1
             print(
-                f"Transcription #{transcription_count} for '{filename}' has been saved. Time taken: {time_taken:.2f} seconds"
+                f"Transcription #{transcription_count} for '{filename}' has been saved. Time taken: {formatted_time}"
             )
         else:
             print(f"{filename} has an unsupported file extension. Skipping...")
 
+    # Format the total time
+    total_time_formatted = f"{int(total_time // 3600):02d}:{int((total_time % 3600) // 60):02d}:{int(total_time % 60):02d}.{int((total_time % 1) * 100):02d}"
+
     print(f"\nFinished processing {transcription_count} audio files.\n")
-    print(f"Total time: {total_time:.2f} seconds")
+    print(f"Total time: {total_time_formatted}")
 
 
 if __name__ == "__main__":
