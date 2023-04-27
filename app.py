@@ -1,6 +1,8 @@
 import os
-import whisper
 import time
+from datetime import timedelta
+
+import whisper
 
 
 input_folder = "./input/"
@@ -12,10 +14,8 @@ valid_extensions = [
 ]  # Add or modify the file extensions as needed
 
 # Create folders if they don't exist
-if not os.path.exists(output_folder):
-    os.makedirs(output_folder)
-if not os.path.exists(input_folder):
-    os.makedirs(input_folder)
+os.makedirs(output_folder, exist_ok=True)
+os.makedirs(input_folder, exist_ok=True)
 
 
 # Load the local whisper model.
@@ -63,7 +63,7 @@ def main():
 
             transcription_count += 1
             print(
-                f"Transcription #{transcription_count} for {filename} has been saved. Time taken: {time_taken:.2f} seconds"
+                f"Transcription #{transcription_count} for '{filename}' has been saved. Time taken: {time_taken:.2f} seconds"
             )
         else:
             print(f"{filename} has an unsupported file extension. Skipping...")
